@@ -51,6 +51,8 @@
 * 平均值計算可以加權，如：`np.average(a, axis=1, weights=[0.25, 0.75])`
 
 ## Day 6 : 使用 NumPy 存取各種檔案內容
+* .npy 與 .npz 格式是 NumPy 的檔案格式，透過 `save()`、`savez()`、`load()` 函式進行儲存與讀取。
+* 針對文字檔，可以使用 `savetxt()`、`loadtxt()` 來儲存與讀取。功能更強大的 `genfromtxt()` 則是提供更多選項在讀取檔案時進行操作
 
 ## Day 7 : NumPy 的矩陣函式與線性代數應用
 
