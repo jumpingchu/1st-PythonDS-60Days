@@ -1,6 +1,6 @@
 # 第一屆《Python 資料科學程式馬拉松》
 
-# 1. Numpy
+<img width=150 src="np.png"></img>
 ## Day 1 : NumPy 基本操作
 * 建立陣列：`array()`, `arange()`, `linspace()`
 * 建立特殊陣列：`zeros()`, `ones()`, `empty()`
@@ -57,7 +57,7 @@
 ## Day 8 : NumPy 結構化陣列
 
 ---
-# 2. Pandas
+<img width=150 src="pd.png"></img>
 ## Day 9 : 使用 Pandas 讀寫各種常用的檔案格式
 
 ## Day 10 : Pandas 資料索引操作 (資料過濾、選擇與合併)
