@@ -1,5 +1,6 @@
 # 第一屆《Python 資料科學程式馬拉松》
 
+# 1. Numpy
 ## Day 1 : NumPy 基本操作
 * 建立陣列：`array()`, `arange()`, `linspace()`
 * 建立特殊陣列：`zeros()`, `ones()`, `empty()`
@@ -45,3 +46,18 @@
 ## Day 4 : NumPy 陣列邏輯函式
 * 函數應注意是否為 element-wise 的比較邏輯 (＝該傳入陣列還是元素)
 
+## Day 5 : NumPy 統計函式
+* 注意是否要忽略 nan，不忽略的話基本上都會優先回傳 nan
+* 平均值計算可以加權，如：`np.average(a, axis=1, weights=[0.25, 0.75])`
+
+## Day 6 : 使用 NumPy 存取各種檔案內容
+
+## Day 7 : NumPy 的矩陣函式與線性代數應用
+
+## Day 8 : NumPy 結構化陣列
+
+---
+# 2. Pandas
+## Day 9 : 使用 Pandas 讀寫各種常用的檔案格式
+
+## Day 10 : Pandas 資料索引操作 (資料過濾、選擇與合併)
