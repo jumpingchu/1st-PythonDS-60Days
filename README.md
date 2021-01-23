@@ -57,8 +57,12 @@
 ## Day 7 : NumPy 的矩陣函式與線性代數應用
 
 ## Day 8 : NumPy 結構化陣列
+* 資料型別常在陣列中用到，NumPy 的 dtype 彈性很大，並且可以與 Python 資料型別交互使用
+* NumPy 陣列也可以儲存複合式資料，也就是包含不同資料型別的元素。這就是結構化陣列 (Structured Arrays) 的功能，進行後續的資料存取及處理。
+![dtype_ref](Day008/dtype%20對照表.png)
 
 ---
+
 <img width=150 src="pd.png"></img>
 ## Day 9 : 使用 Pandas 讀寫各種常用的檔案格式
 
