@@ -64,6 +64,11 @@
 ---
 
 <img width=150 src="pd.png"></img>
+
 ## Day 9 : 使用 Pandas 讀寫各種常用的檔案格式
+* 讀寫 csv: `read_csv()`, `to_csv()`
+* 讀寫 excel: `read_excel()`, `to_excel()`
+* 讀寫 json: `read_json()`, `to_json()`
+* 讀寫 SQL 資料庫: `io.sql.read_sql()`, `to_sql()`
 
 ## Day 10 : Pandas 資料索引操作 (資料過濾、選擇與合併)
