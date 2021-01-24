@@ -72,3 +72,8 @@
 * 讀寫 SQL 資料庫: `io.sql.read_sql()`, `to_sql()`
 
 ## Day 10 : Pandas 資料索引操作 (資料過濾、選擇與合併)
+* 指定欄位名稱當做索引: `.set_index()` 
+* 對欄位名稱進行重新命名: `.rename(column={'old_name': 'new_name'})`
+* 增加欄位: `['new_col_name']`, `.insert()`
+* 刪除欄位: `del`, `.pop()`, `.drop()`
+* 增加列資料: `.append()`
