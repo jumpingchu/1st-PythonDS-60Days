@@ -81,3 +81,14 @@
 * 增加欄位: `['new_col_name']`, `.insert()`
 * 刪除欄位: `del`, `.pop()`, `.drop()`
 * 增加列資料: `.append()`
+
+## Day 11 : Pandas 類別資料、缺失值處理
+### 類別資料
+* 順序性的類別資料，需要有順序性的 encoding 方法，可以使用 sklearn 中的 `LabelEncoder()`
+* 對於一般性的類別資料，則不需要有順序的編碼，可以使用 pandas 中的 `get_dummies()`
+### 缺失值補值 
+* `fillna()`
+    1. 補定值
+    2. 補平均值 `mean()` 或中位數 `median()`
+    3. `method='ffill'`(補前值) 或 `'bfill'`（補後值）
+* 內插法補值 `interpolate()`
