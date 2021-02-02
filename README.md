@@ -136,7 +136,7 @@
 
 ## Day 16 : Pandas 時間序列
 * 控制時間長度的函數 `.to_period()`，參數 `freq` 代表時間頻率(Y：年 / M：月 / W：週 / D：日 / H：小時)
-* 利用 `resample()` 更改時間頻率運用，如年轉成季 `resample('Q')`
+* 利用 `resample()` 更改時間頻率，如年轉成季 `resample('Q')`
 * 移動（shifting）指的是沿著時間軸將資料前移或後移：`.shift(periods=1, freq=None)`
 * 時間需要使用 `pd.Timestamp()` 做設定
     * 如：`pd.Timestamp(2021, 2, 2)` 
