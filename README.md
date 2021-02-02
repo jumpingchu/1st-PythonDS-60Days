@@ -106,3 +106,48 @@
 ### 散佈圖
 * 適用：呈現相關數值間的關係
 * 函數 : `.plot.scatter(x, y)`
+
+## Day 13 : Pandas 統計函式使用教學
+### 相關係數
+1. 介於 –1 與 +1 之間，即 –1 ≤ r ≤ +1
+    * r > 0 時，表示兩變數正相關
+    * r < 0 時，兩變數為負相關
+    * r = 0 時，表示兩變數間無線性相關
+2. 一般可按三級劃分：
+    * | r | < 0.4 為低度線性相關
+    * 0.4 ≤ | r | < 0.7 為顯著性相關
+    * 0.7 ≤ | r | < 1 為高度線性相關
+3. `pandas.DataFrame.corr()` or `pandas.Series.corr()`
+
+## Day 14 : 用 Pandas 撰寫樞紐分析表
+* 索引轉欄位 `.unstack()`
+* 欄位轉索引 `.stack()`  (注意都是由最外層開始轉換)
+* 欄位名稱轉為欄位值 `.melt()`，其中參數:
+    * `id_vars`：不需要被轉換的列名
+    * `value_vars`：需要轉換的列名，如果剩下的列全部都要轉換，就不用寫了
+* 重新組織資料 `.pivot()`，其中參數
+    * `index`：新資料的索引名稱 
+    * `columns`：新資料的欄位名稱
+    * `values`：新資料的值名稱
+
+## Day 15 : Split-Apply-Combine Strategy (GroupBy)
+* `.groupby().agg()` 可以同時針對多個欄位做多個分析
+    * 如 `df.groupby(['sex', 'class']).agg(['mean', 'max'])`
+
+## Day 16 : Pandas 時間序列
+* 控制時間長度的函數 `.to_period()`，參數 `freq` 代表時間頻率(Y：年 / M：月 / W：週 / D：日 / H：小時)
+* 利用 `resample()` 更改時間頻率運用，如年轉成季 `resample('Q')`
+* 移動（shifting）指的是沿著時間軸將資料前移或後移：`.shift(periods=1, freq=None)`
+* 時間需要使用 `pd.Timestamp()` 做設定
+    * 如：`pd.Timestamp(2021, 2, 2)` 
+    * 可以直接加時間或是計算時間差距
+* 時間轉字串 `date.strftime('%Y-%m-%d')`
+* 字串轉時間 `pd.to_datetime(str_date)`
+* 計算工作日 `pd.offsets.BDay()`
+
+## Day 17 : Pandas 效能調校
+* 三個加速方法
+    * 讀取資料型態選最快速的 (可先存為 pkl 檔 `to_pickle()`，減少之後每次開啟所花費的時間)
+    * 多使用內建函數 (如 `agg()`, `transform()`...)
+    * 向量化的資料處理 (如 `isin()`...)
+* 欄位的型態降級有助於減少記憶體佔用空間
