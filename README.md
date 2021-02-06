@@ -234,12 +234,13 @@ sns.regplot(x="total_bill", y="tip", data=tips)
 * 散點圖的主要問題是散點圖上的點重疊
 * 可使用 `jitter=True` 參數來處理此類方案
 * `jitter` 會為數據添加一些隨機雜訊，將沿分類軸調整位置
-        
-        sns.stripplot(x="species", y="petal_length", data=df, jitter=True)
-
+    ```python    
+    sns.stripplot(x="species", y="petal_length", data=df, jitter=True)
+    ```
 * `swarmplot()` 函數將散點圖的每個點都放在分類軸上，避免重疊點
-
-        sns.swarmplot(x="species", y="petal_length", data=df)
+    ```python  
+    sns.swarmplot(x="species", y="petal_length", data=df)
+    ```
 
 ### 核密度估計 (Kernel Density Estimates, KDE)
 * 用來繪製密度數據，可更加準確地反映總體的基本變量
