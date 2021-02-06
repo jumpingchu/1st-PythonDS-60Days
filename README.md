@@ -1,6 +1,6 @@
 # 第一屆《Python 資料科學程式馬拉松》
 
-<img width=150 src="np.png"></img>
+<img width=150 src="images/np.png"></img>
 ## Day 1 : NumPy 基本操作
 * 建立陣列：`array()`, `arange()`, `linspace()`
 * 建立特殊陣列：`zeros()`, `ones()`, `empty()`
@@ -63,11 +63,11 @@
 ## Day 8 : NumPy 結構化陣列
 * 資料型別常在陣列中用到，NumPy 的 dtype 彈性很大，並且可以與 Python 資料型別交互使用
 * NumPy 陣列也可以儲存複合式資料，也就是包含不同資料型別的元素。這就是結構化陣列 (Structured Arrays) 的功能，進行後續的資料存取及處理。
-![dtype_ref](Day008/dtype%20對照表.png)
+![dtype_ref](images/dtype%20對照表.png)
 
 ---
 
-<img width=150 src="pd.png"></img>
+<img width=150 src="images/pd.png"></img>
 
 ## Day 9 : 使用 Pandas 讀寫各種常用的檔案格式
 * 讀寫 csv: `read_csv()`, `to_csv()`
@@ -96,22 +96,26 @@
 ## Day 12 : Pandas 常見圖表程式設計
 ### 折線圖
 * 適用：會隨時間變動的值
-
-        .plot()
+    ```python
+    .plot()
+    ```
 ### 長條圖
 * 適用：不同種類資料，在不同時間點的變化
-
-        .plot.bar(stacked=False)
+    ```python
+    .plot.bar(stacked=False)
+    ```
 
 ### 箱型圖
 * 適用：完整呈現數值分布的統計圖表
-
-        .boxplot()
+    ```python
+    .boxplot()
+    ```
 
 ### 散佈圖
 * 適用：呈現相關數值間的關係
-
-        .plot.scatter(x, y)
+    ```python
+    .plot.scatter(x, y)
+    ```
 
 ## Day 13 : Pandas 統計函式使用教學
 ### 相關係數
@@ -141,35 +145,37 @@
 
 ## Day 15 : Split-Apply-Combine Strategy (GroupBy)
 * `.groupby().agg()` 可以同時針對多個欄位做多個分析
-
-        df.groupby(['sex', 'class']).agg(['mean', 'max'])
+    ```python
+    df.groupby(['sex', 'class']).agg(['mean', 'max'])
+    ```
 
 ## Day 16 : Pandas 時間序列
 * 控制時間長度的函數 `.to_period()`，參數 `freq` 代表時間頻率(Y：年 / M：月 / W：週 / D：日 / H：小時)
 * 利用 `resample()` 更改時間頻率，如年轉成季 `resample('Q')`
 * 移動（shifting）指的是沿著時間軸將資料前移或後移
-        
-        .shift(periods=1, freq=None)
+    ```python        
+    .shift(periods=1, freq=None)
+    ```
 
 * 時間需要使用 `pd.Timestamp()` 做設定
     * 例如：
-    
-            pd.Timestamp(2021, 2, 2)
-
+        ```python     
+        pd.Timestamp(2021, 2, 2)
+        ```
     * 可以直接加時間或是計算時間差距
 
 * 時間轉字串 
-
-        date.strftime('%Y-%m-%d')
-
+    ```python
+    date.strftime('%Y-%m-%d')
+    ```
 * 字串轉時間
-
-        pd.to_datetime(str_date)
-
+    ```python
+    pd.to_datetime(str_date)
+    ```
 * 計算工作日 
-
-        pd.offsets.BDay()
-
+    ```python
+    pd.offsets.BDay()
+    ```
 ## Day 17 : Pandas 效能調校
 * 三個加速方法
     * 讀取資料型態選最快速的 (可先存為 pkl 檔 `to_pickle()`，減少之後每次開啟所花費的時間)
@@ -203,21 +209,22 @@
 ## Day 20 : 使用 Seaborn 進行資料視覺化
 ### 樣式
 * 設定圖形樣式
-    
-        sns.set_style(“whitegrid”)
-
+    ```python   
+    sns.set_style(“whitegrid”)
+    ```
 * 五種預設：darkgrid, whitegrid, dark, white, ticks
 
 ### 聚合和表示不確定性
 * 對於較大的數據是通過繪製標準差來表示每個時間點的分佈，而不是信心區間
-
-        sns.relplot(x, y, ci="sd")
+    ```python
+    sns.relplot(x, y, ci="sd")
+    ```
 
 * 語義映射繪製數據子集
-
-        sns.relplot(x, y, hue="region", style="event")
-
+    ```python
+    sns.relplot(x, y, hue="region", style="event")
+    ```
 ### 可視化線性關係
-
-    sns.regplot(x="total_bill", y="tip", data=tips)
-
+```python
+sns.regplot(x="total_bill", y="tip", data=tips)
+```
