@@ -185,9 +185,9 @@
 
 ---
 
-<img width=150 src="images/matplotlib.svg"></img><br>
-<img width=150 src="images/seaborn.png"></img><br>
-<img width=150 src="images/bokeh.png"></img><br>
+<img width=150 src="images/matplotlib.svg"></img>
+<img width=150 src="images/seaborn.png"></img>
+<img width=150 src="images/bokeh.png"></img>
 
 ## Day 18 : Python 資料視覺化工具與常見統計圖表介紹
 * matplotlib
