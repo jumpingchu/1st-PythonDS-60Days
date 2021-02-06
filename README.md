@@ -96,16 +96,22 @@
 ## Day 12 : Pandas 常見圖表程式設計
 ### 折線圖
 * 適用：會隨時間變動的值
-* 函數 : `.plot()`
+
+        .plot()
 ### 長條圖
 * 適用：不同種類資料，在不同時間點的變化
-* 函數 : `.plot.bar(stacked=False)`
+
+        .plot.bar(stacked=False)
+
 ### 箱型圖
 * 適用：完整呈現數值分布的統計圖表
-* 函數 : `.boxplot()`
+
+        .boxplot()
+
 ### 散佈圖
 * 適用：呈現相關數值間的關係
-* 函數 : `.plot.scatter(x, y)`
+
+        .plot.scatter(x, y)
 
 ## Day 13 : Pandas 統計函式使用教學
 ### 相關係數
@@ -117,7 +123,10 @@
     * | r | < 0.4 為低度線性相關
     * 0.4 ≤ | r | < 0.7 為顯著性相關
     * 0.7 ≤ | r | < 1 為高度線性相關
-3. `pandas.DataFrame.corr()` or `pandas.Series.corr()`
+3. ```python
+    pandas.DataFrame.corr()
+    pandas.Series.corr()
+    ```
 
 ## Day 14 : 用 Pandas 撰寫樞紐分析表
 * 索引轉欄位 `.unstack()`
@@ -132,18 +141,34 @@
 
 ## Day 15 : Split-Apply-Combine Strategy (GroupBy)
 * `.groupby().agg()` 可以同時針對多個欄位做多個分析
-    * 如 `df.groupby(['sex', 'class']).agg(['mean', 'max'])`
+
+        df.groupby(['sex', 'class']).agg(['mean', 'max'])
 
 ## Day 16 : Pandas 時間序列
 * 控制時間長度的函數 `.to_period()`，參數 `freq` 代表時間頻率(Y：年 / M：月 / W：週 / D：日 / H：小時)
 * 利用 `resample()` 更改時間頻率，如年轉成季 `resample('Q')`
-* 移動（shifting）指的是沿著時間軸將資料前移或後移：`.shift(periods=1, freq=None)`
+* 移動（shifting）指的是沿著時間軸將資料前移或後移
+        
+        .shift(periods=1, freq=None)
+
 * 時間需要使用 `pd.Timestamp()` 做設定
-    * 如：`pd.Timestamp(2021, 2, 2)` 
+    * 例如：
+    
+            pd.Timestamp(2021, 2, 2)
+
     * 可以直接加時間或是計算時間差距
-* 時間轉字串 `date.strftime('%Y-%m-%d')`
-* 字串轉時間 `pd.to_datetime(str_date)`
-* 計算工作日 `pd.offsets.BDay()`
+
+* 時間轉字串 
+
+        date.strftime('%Y-%m-%d')
+
+* 字串轉時間
+
+        pd.to_datetime(str_date)
+
+* 計算工作日 
+
+        pd.offsets.BDay()
 
 ## Day 17 : Pandas 效能調校
 * 三個加速方法
@@ -151,3 +176,48 @@
     * 多使用內建函數 (如 `agg()`, `transform()`...)
     * 向量化的資料處理 (如 `isin()`...)
 * 欄位的型態降級有助於減少記憶體佔用空間
+
+---
+
+<img width=150 src="images/matplotlib.svg"></img><br>
+<img width=150 src="images/seaborn.png"></img><br>
+<img width=150 src="images/bokeh.png"></img><br>
+
+## Day 18 : Python 資料視覺化工具與常見統計圖表介紹
+* matplotlib
+* seaborn
+* bokeh
+* basemap
+
+## Day 19 : 使用 Matplotlib 繪製各種常用圖表
+* 建議以下步驟學習如何使用 Matplotlib：
+    1. 學習 Matplotlib 的基本術語, 具體來說就是什麼是 Figure 和 Axes
+    2. 一直使用面向對象的介面，養成習慣
+    3. 用基礎的 pandas 繪圖開始可視化
+    4. 使用 seaborn 進行稍微複雜的數據可視化
+    5. 使用 Matplotlib 自訂 pandas 或 seaborn 視覺化
+
+![figure_anatomy](images/anatomy_of_a_figure.png)
+![figure_anatomy](images/plot_customization.png)
+
+## Day 20 : 使用 Seaborn 進行資料視覺化
+### 樣式
+* 設定圖形樣式
+    
+        sns.set_style(“whitegrid”)
+
+* 五種預設：darkgrid, whitegrid, dark, white, ticks
+
+### 聚合和表示不確定性
+* 對於較大的數據是通過繪製標準差來表示每個時間點的分佈，而不是信心區間
+
+        sns.relplot(x, y, ci="sd")
+
+* 語義映射繪製數據子集
+
+        sns.relplot(x, y, hue="region", style="event")
+
+### 可視化線性關係
+
+    sns.regplot(x="total_bill", y="tip", data=tips)
+
