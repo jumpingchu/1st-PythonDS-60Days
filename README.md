@@ -253,3 +253,11 @@ g.map_upper(sns.scatterplot) # 指定對角線右上區塊的圖形
 g.map_lower(sns.kdeplot)     # 指定對角線左下區塊的圖形
 g.map_diag(sns.kdeplot)      # 指定對角線的圖形
 ```
+
+## Day 23 : Bokeh - 輕鬆以網頁呈現視覺化圖表
+### 參考
+
+1. [知乎：Bokeh 處理分類數據](https://zhuanlan.zhihu.com/p/52093055)
+
+2. [Bokeh 探索頻道(1)~Python互動式圖表函數庫初體驗](https://www.finlab.tw/python-bokeh1-setup-and-first-impression/)
+
