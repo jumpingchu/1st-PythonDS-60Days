@@ -248,7 +248,8 @@ sns.regplot(x="total_bill", y="tip", data=tips)
     * 曲線下方面積為1
 
 ## Day 22 : 結合 Pandas 與 Matplotlib 進行進階資料視覺化練習
-```pyhton
+```python
+g = sns.PairGrid(data)
 g.map_upper(sns.scatterplot) # 指定對角線右上區塊的圖形
 g.map_lower(sns.kdeplot)     # 指定對角線左下區塊的圖形
 g.map_diag(sns.kdeplot)      # 指定對角線的圖形
@@ -261,3 +262,4 @@ g.map_diag(sns.kdeplot)      # 指定對角線的圖形
 
 2. [Bokeh 探索頻道(1)~Python互動式圖表函數庫初體驗](https://www.finlab.tw/python-bokeh1-setup-and-first-impression/)
 
+## Day 24 : Basemap 進行地理資訊繪圖
