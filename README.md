@@ -247,3 +247,9 @@ sns.regplot(x="total_bill", y="tip", data=tips)
     * 在數據點處為波峰
     * 曲線下方面積為1
 
+## Day 22 : 結合 Pandas 與 Matplotlib 進行進階資料視覺化練習
+```pyhton
+g.map_upper(sns.scatterplot) # 指定對角線右上區塊的圖形
+g.map_lower(sns.kdeplot)     # 指定對角線左下區塊的圖形
+g.map_diag(sns.kdeplot)      # 指定對角線的圖形
+```
