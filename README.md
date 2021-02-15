@@ -262,4 +262,24 @@ g.map_diag(sns.kdeplot)      # 指定對角線的圖形
 
 2. [Bokeh 探索頻道(1)~Python互動式圖表函數庫初體驗](https://www.finlab.tw/python-bokeh1-setup-and-first-impression/)
 
-## Day 24 : Basemap 進行地理資訊繪圖
+## Day 24 : BaseMap 進行地理資訊繪圖
+
+
+## Day 25 : 使用 Pandas 與 BaseMap 將數據整合於地理資訊圖表
+
+
+## Day 26 : 用統計描述資料的樣態
+### 分布型態 - 偏度 (Skewness)
+衡量資料分佈的不對稱性與偏斜方向程度，偏度分為兩種：
+* 負偏態或左偏態：左側的尾部更長，分布的主體集中在右側，左側有較多極端值。
+* 正偏態或右偏態：右側的尾部更長，分布的主體集中在左側，右側有較多極端值，日常生活數據常見右偏態分布。
+![skew](./images/skew.png)
+
+### 分布型態 - 峰度（Kurtosis）
+
+* 資料分佈的峰態反映了峰部的尖度，也代表變異數的來源來自於不常出現的尾巴兩端的數值。
+![kurtosis](./images/kurtosis.png)
+
+### 離散趨勢 - 確定一組數據分布的均勻程度
+![skew_kurtosis](./images/skew_kurtosis.png)
+
