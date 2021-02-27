@@ -311,3 +311,33 @@ g.map_diag(sns.kdeplot)      # 指定對角線的圖形
 * `α`：Type I error/型一誤差，又稱偽陽性 false positive，H0 是對的，但是我們做了實驗後，卻拒絕H0，又稱顯著水準(significant level)，設定 α 值愈小，表示希望檢測時的誤判機率愈低(即希望檢定能愈準確)
 * `β`：Type II error/型二誤差，又稱偽陰性 false negative，H0 是錯的，但是我們做了實驗後，卻沒有證據拒絕 H0。
 * `1- β`：又稱檢定力，H0 是錯的，但是我們做了實驗後拒絕 H0 的能力。
+
+## Day 33 : A/B test 的執行流程與計算
+```python
+import statsmodels.stats.proportion
+statsmodels.stats.proportion.proportions_ztest(count, nobs, value=None, alternative='two-sided', prop_var=False)
+```
+* count: 
+    * Integer/Array_like
+    * The number of successes in nobs trials.
+* nobs: 
+    * Integer/Array_like
+    * The number of trials or observations.
+* alternative
+    * two-sided / smaller / larger
+    *  雙尾檢定  / 左尾檢定 / 右尾檢定
+
+作業：
+```python
+A = [75, 30] # [不良品數 1, 不良品數 2]
+B = [300, 300] # 各組商品抽樣總數
+z, p = statsmodels.stats.proportion.proportions_ztest(A, B, alternative='two-sided') 
+print('{:.8f}'.format(p))
+# output: 0.00000133
+```
+---
+## ***探索性資料分析 (EDA)***
+
+## Day 34 : 淺談資料科學與EDA所扮演的角色與重要性
+
+## Day 35 : 探索性資料分析(EDA)_數據理解與重覆和遺失值處理
