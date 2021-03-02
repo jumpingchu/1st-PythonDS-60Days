@@ -65,7 +65,12 @@
         - [觀察重複值](#觀察重複值)
         - [補值](#補值)
     - [Day 36 : 異常值偵測](#day-36--異常值偵測)
+        - [利用標準差倍數找出異常值](#利用標準差倍數找出異常值)
+        - [利用 IQR 和 boxplot 找出異常值](#利用-iqr-和-boxplot-找出異常值)
 
+<br>
+
+---
 <img width=150 src="images/np.png"></img>
 
 ## Day 1 : NumPy 基本操作
@@ -449,3 +454,24 @@ df['Age']=df['Age'].fillna(method='pad')
 ```
 
 ## Day 36 : 異常值偵測
+### 利用標準差倍數找出異常值
+```python
+def outlier_zsore(data, max_sigma):  # 3 倍標準差則 max_sigma = 3
+    mean = np.mean(data)
+    std = np.std(data)
+    zscores = [(d - mean)/std for d in data]
+    return np.where(np.abs(zscores) > max_sigma)
+```
+### 利用 IQR 和 boxplot 找出異常值
+```python
+def outlier_iqr(data, iqr_times):
+    q1, q3 = np.nanpercentile(data, [25, 75])
+    iqr = q3 - q1
+    lower = q1 - (iqr * iqr_times)
+    upper = q3 + (iqr * iqr_times)
+    return np.where((data < lower) | (data > upper))
+
+plt.boxplot(data_not_nan, whis=3)  
+# whis: The position of the whiskers. (default: 1.5)
+```
+
