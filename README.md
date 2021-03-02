@@ -1,10 +1,92 @@
 # 第一屆《Python 資料科學程式馬拉松》
 
+- **Numpy**
+    - [Day 1 : NumPy 基本操作](#day-1--numpy-基本操作)
+    - [Day 2 : NumPy 陣列進階操作](#day-2--numpy-陣列進階操作)
+        - [陣列重塑](#陣列重塑)
+        - [軸 (axis)](#軸-axis)
+        - [陣列合併](#陣列合併)
+        - [陣列分割](#陣列分割)
+        - [迭代](#迭代)
+        - [搜尋](#搜尋)
+        - [排序](#排序)
+    - [Day 3 : NumPy 陣列運算及數學](#day-3--numpy-陣列運算及數學)
+    - [Day 4 : NumPy 陣列邏輯函式](#day-4--numpy-陣列邏輯函式)
+    - [Day 5 : NumPy 統計函式](#day-5--numpy-統計函式)
+    - [Day 6 : 使用 NumPy 存取各種檔案內容](#day-6--使用-numpy-存取各種檔案內容)
+    - [Day 7 : NumPy 的矩陣函式與線性代數應用](#day-7--numpy-的矩陣函式與線性代數應用)
+    - [Day 8 : NumPy 結構化陣列](#day-8--numpy-結構化陣列)
+- **Pandas**
+    - [Day 9 : 使用 Pandas 讀寫各種常用的檔案格式](#day-9--使用-pandas-讀寫各種常用的檔案格式)
+    - [Day 10 : Pandas 資料索引操作 (資料過濾、選擇與合併)](#day-10--pandas-資料索引操作-資料過濾選擇與合併)
+    - [Day 11 : Pandas 類別資料、缺失值處理](#day-11--pandas-類別資料缺失值處理)
+        - [類別資料](#類別資料)
+        - [缺失值補值](#缺失值補值)
+    - [Day 12 : Pandas 常見圖表程式設計](#day-12--pandas-常見圖表程式設計)
+        - [折線圖](#折線圖)
+        - [長條圖](#長條圖)
+        - [箱型圖](#箱型圖)
+        - [散佈圖](#散佈圖)
+    - [Day 13 : Pandas 統計函式使用教學](#day-13--pandas-統計函式使用教學)
+        - [相關係數](#相關係數)
+    - [Day 14 : 用 Pandas 撰寫樞紐分析表](#day-14--用-pandas-撰寫樞紐分析表)
+    - [Day 15 : Split-Apply-Combine Strategy (GroupBy)](#day-15--split-apply-combine-strategy-groupby)
+    - [Day 16 : Pandas 時間序列](#day-16--pandas-時間序列)
+    - [Day 17 : Pandas 效能調校](#day-17--pandas-效能調校)
+- **資料視覺化**
+    - [Day 18 : Python 資料視覺化工具與常見統計圖表介紹](#day-18--python-資料視覺化工具與常見統計圖表介紹)
+    - [Day 19 : 使用 Matplotlib 繪製各種常用圖表](#day-19--使用-matplotlib-繪製各種常用圖表)
+    - [Day 20 : 使用 Seaborn 進行資料視覺化](#day-20--使用-seaborn-進行資料視覺化)
+        - [樣式](#樣式)
+        - [聚合和表示不確定性](#聚合和表示不確定性)
+        - [可視化線性關係](#可視化線性關係)
+    - [Day 21 : 運用實際資料集進行資料視覺化練習](#day-21--運用實際資料集進行資料視覺化練習)
+        - [分類式的變數](#分類式的變數)
+        - [核密度估計 (Kernel Density Estimates, KDE)](#核密度估計-kernel-density-estimates-kde)
+    - [Day 22 : 結合 Pandas 與 Matplotlib 進行進階資料視覺化練習](#day-22--結合-pandas-與-matplotlib-進行進階資料視覺化練習)
+    - [Day 23 : Bokeh - 輕鬆以網頁呈現視覺化圖表](#day-23--bokeh---輕鬆以網頁呈現視覺化圖表)
+        - [參考](#參考)
+    - [Day 24 : BaseMap 進行地理資訊繪圖](#day-24--basemap-進行地理資訊繪圖)
+    - [Day 25 : 使用 Pandas 與 BaseMap 將數據整合於地理資訊圖表](#day-25--使用-pandas-與-basemap-將數據整合於地理資訊圖表)
+- **統計基礎知識**
+    - [Day 26 : 用統計描述資料的樣態](#day-26--用統計描述資料的樣態)
+        - [分布型態 - 偏度 (Skewness)](#分布型態---偏度-skewness)
+        - [分布型態 - 峰度（Kurtosis）](#分布型態---峰度kurtosis)
+        - [離散趨勢 - 確定一組數據分布的均勻程度](#離散趨勢---確定一組數據分布的均勻程度)
+    - [Day 31 : 掌握 A/B test 的精隨 - 假設檢定的概念](#day-31--掌握-ab-test-的精隨---假設檢定的概念)
+        - [假設檢定的六個步驟](#假設檢定的六個步驟)
+    - [Day 32 : 掌握 AB test 的精隨 - 假設檢定的進階概念與種類](#day-32--掌握-ab-test-的精隨---假設檢定的進階概念與種類)
+        - [Z 分配 (標準常態) 和 t 分配在檢定的使用時機](#z-分配-標準常態-和-t-分配在檢定的使用時機)
+        - [假設檢定的誤差類型](#假設檢定的誤差類型)
+    - [Day 33 : A/B test 的執行流程與計算](#day-33--ab-test-的執行流程與計算)
+- **探索性資料分析 (EDA)**
+    - [Day 34 : 淺談資料科學與 EDA 所扮演的角色與重要性](#day-34--淺談資料科學與-eda-所扮演的角色與重要性)
+    - [Day 35 : 數據理解與重覆和遺失值處理](#day-35--數據理解與重覆和遺失值處理)
+        - [觀察重複值](#觀察重複值)
+        - [補值](#補值)
+    - [Day 36 : 異常值偵測](#day-36--異常值偵測)
+
 <img width=150 src="images/np.png"></img>
+
 ## Day 1 : NumPy 基本操作
-* 建立陣列：`array()`, `arange()`, `linspace()`
-* 建立特殊陣列：`zeros()`, `ones()`, `empty()`
-* 查看陣列屬性：`shape`, `ndim`, `dtype`, `size`, `flat[index]`
+```python
+# 建立陣列
+.array()
+.arange()
+.linspace()
+
+# 建立特殊陣列
+.zeros()
+.ones()
+.empty()
+
+# 查看陣列屬性
+.shape
+.ndim
+.dtype
+.size
+.flat[index]
+```
 
 ## Day 2 : NumPy 陣列進階操作
 ### 陣列重塑
@@ -263,8 +345,6 @@ g.map_diag(sns.kdeplot)      # 指定對角線的圖形
 2. [Bokeh 探索頻道(1)~Python互動式圖表函數庫初體驗](https://www.finlab.tw/python-bokeh1-setup-and-first-impression/)
 
 ## Day 24 : BaseMap 進行地理資訊繪圖
-
-
 ## Day 25 : 使用 Pandas 與 BaseMap 將數據整合於地理資訊圖表
 
 ---
@@ -289,7 +369,7 @@ g.map_diag(sns.kdeplot)      # 指定對角線的圖形
 ## Day 31 : 掌握 A/B test 的精隨 - 假設檢定的概念
 * A/B test 是一個幫助大家做決定的方法，讓每一個選擇不再靠感覺。
 * A/B 測試主要包含三個核心概念：「隨機化的實驗」、「一個變因，兩種選擇」、「兩種樣本的假設檢定」
-### 假設檢定的六個步驟：
+### 假設檢定的六個步驟
 * `Step1`：將抽象情况數值化 
     * 把抽象化的現象數量化，從 A/B 情境轉成 H0 / H1
     * H0 稱為虛無假設
