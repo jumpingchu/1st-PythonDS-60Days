@@ -442,10 +442,10 @@ df.duplicated()
 # 固定值補值
 df['Age'] = df['Age'].fillna(0)
 
-# 平均值補值
+# 平均值補值 (適用於時間性相關)
 df['Age'] = df['Age'].fillna(df['Age'].mean())
 
-# 前值補後值
+# 前值補後值 (適用於時間性相關)
 df['Age']=df['Age'].fillna(method='bfill')
 
 # 後值補前值
@@ -474,4 +474,57 @@ def outlier_iqr(data, iqr_times):
 plt.boxplot(data_not_nan, whis=3)  
 # whis: The position of the whiskers. (default: 1.5)
 ```
+## Day 37 : 遺失值與異常值的進階補值策略
 
+### 什麼是 KNN？
+* K-Nearest Neighbor(KNN) 是一種無須機率分配的假設下的演算法，跟距離預測值最近的 k 個數值，來估計預測值
+* 類別型資料透過投票來決定預測值 (e.g. 性別)，因此 k 建議以奇數為主，避免掉平手的問題
+
+### KNN 的三個步驟
+1. 算距離
+    * 歐基里德距離（Euclidean distance)
+2. 尋找最近 k 組數值
+3. 類別型態資料以多數決
+
+### 運用 sklearn 的 KNN Imputer 進行補值
+```python
+sklearn.impute.KNNImputer(*, missing_values=nan, n_neighbors=5, weights='uniform', metric='nan_euclidean', copy=True, add_indicator=False)
+```
+![knn_imputer](images/knn_imputer.png)
+
+* Step1：離散轉連續型資料
+    ```python
+    from sklearn import preprocessing
+    le = preprocessing.LabelEncoder()
+    data['sex'] = le.fit_transform(data['sex'])
+    ```
+* Step 2 ：計算資料點的倆倆距離 （了解 KNN Imputer 補值選擇 (metric參數) ）
+    ```python
+    from sklearn.metrics.pairwise import nan_euclidean_distances
+    print(nan_euclidean_distances(data))
+    ```
+
+* Step3：透過 KNN 進行補值
+    ```python
+    from sklearn.impute import KNNImputer
+    neighbors = 1  # 設定 k 值
+    imputer = KNNImputer(n_neighbors=neighbors)
+    df_filled = pd.DataFrame(imputer.fit_transform(data))
+    print(df_filled)
+    ```
+
+### 驗證補值準確度
+#### MSE
+* 透過已知的數值，運用模型預測準確度的指標，來判斷補值的好壞
+* MSE代表均方誤差 (Mean-Square Error)。即絕對誤差的平均值
+* 流程
+    * Step1：取無遺失值的資料集
+    * Step2：隨機取幾個資料點，當作遺失值
+    * Step3：以 step2 產生的遺失值進行補值
+    * Step4：計算 MSE 看補值的效果
+    ```python
+    from sklearn.metrics import mean_squared_error as mse
+    y_true = complete_df['Age']
+    y_pred = verify_df['Age']
+    MSE_h = mse(y_true, y_pred)  # 越低代表補值準確度越高（即誤差越低）
+    ```
