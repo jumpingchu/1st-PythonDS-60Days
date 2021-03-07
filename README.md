@@ -534,3 +534,53 @@ sklearn.impute.KNNImputer(*, missing_values=nan, n_neighbors=5, weights='uniform
     y_pred = verify_df['Age']
     MSE_h = mse(y_true, y_pred)  # 越低代表補值準確度越高（即誤差越低）
     ```
+
+## Day 38 : 探討變數之間的關係
+### 連續 vs. 連續
+#### Pearson 相關係數
+```python
+corr, _ = stats.pearsonr(data['height'], data['weight'])
+```
+
+### 離散 vs. 離散
+#### Cramer’s V 係數
+* 運用卡方檢定的結果來運算出一 個可以估算離散型變數的相關性的指標
+* Step 1: 用交叉列連表(contingency table) 整理資料
+    ```python
+    contTable = pd.crosstab(data_x, data_y)
+    ```
+* Step 2: 計算資料自由度 df
+    ```python
+    df = min(contTable.shape[0], contTable.shape[1]) - 1
+    ```
+* Step 3: 運用 researchpy 套件，計算出 Cramer’s V 係數
+    ```python
+    crosstab, res = researchpy.crosstab(data['sex'], data['insomnia'], test='chi-square')
+    print("Cramer's value is", res.loc[2, 'results'])
+    ```
+* 係數依照自由度不同，有不同的相關性強度判斷
+
+### 離散 vs. 連續
+#### Point biserial’s correlation
+#### Cohen's ds
+#### **eta-squared (η2)**
+* 描述一個離散型變數和連續型變數的相關性
+* η2 是透過變異數分析的概念，所產生出來的指標
+* Step 1: 取出想要比較的資料
+* Step 2: 利用 [Pingouin 的 anova](https://pingouin-stats.org/generated/pingouin.anova.html) 計算變異數
+
+    ```python
+    import pingouin as pg
+    aov = pg.anova(dv=x, between=y, data=data, detailed=True)
+    # [dv]          
+    #     Name of column in data containing the dependent variable.
+    # [between]
+    #     Name of column(s) in data containing the between-subject factor(s).
+    # [SS](return)
+    #     Sums of squares
+    ```
+* Step 3: 計算相關性 etaSq
+    ```python
+    etaSq = aov.SS[0] / (aov.SS[0] + aov.SS[1])
+    ```
+    ![etaSquare](images/etaSquare.png)
