@@ -73,6 +73,15 @@
         - [運用 sklearn 的 KNN Imputer 進行補值](#運用-sklearn-的-knn-imputer-進行補值)
         - [驗證補值準確度](#驗證補值準確度)
             - [MSE](#mse)
+    - [Day 38 : 探討變數之間的關係](#day-38--探討變數之間的關係)        
+        - [連續 vs. 連續](#連續-vs-連續)            
+            - [Pearson 相關係數](#pearson-相關係數)        
+        - [離散 vs. 離散](#離散-vs-離散)            
+            - [Cramer’s V 係數](#cramers-v-係數)        
+        - [離散 vs. 連續](#離散-vs-連續)            
+            - [Point biserial’s correlation](#point-biserials-correlation)            
+            - [Cohen's ds](#cohens-ds)            
+            - [**eta-squared (η2)**](#eta-squared-η2)
     
 <br>
 
