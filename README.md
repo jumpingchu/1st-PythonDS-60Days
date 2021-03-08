@@ -82,6 +82,16 @@
             - [Point biserial’s correlation](#point-biserials-correlation)            
             - [Cohen's ds](#cohens-ds)            
             - [**eta-squared (η2)**](#eta-squared-η2)
+    - [Day 39 : 從資料中生成特徵](#day-39--從資料中生成特徵)
+        - [兩大類特徵工程](#兩大類特徵工程)
+            - [1. 衍生](#1-衍生)
+            - [2. 添加](#2-添加)
+        - [中低相關的資料，如何進一步萃取可用特徵？](#中低相關的資料如何進一步萃取可用特徵)
+            - [指示器變量 (Indicator)](#指示器變量-indicator)
+            - [資料組合 (Combination)](#資料組合-combination)
+            - [資料重新定義 (Reshape)](#資料重新定義-reshape)
+        - [最後再進行特徵與目標變數的相關性檢驗（回到 Day 38 的部分）](#最後再進行特徵與目標變數的相關性檢驗回到-day-38-的部分)
+    - [Day 40 : 從資料中選取好的特徵](#day-40--從資料中選取好的特徵)
     
 <br>
 
@@ -593,3 +603,44 @@ corr, _ = stats.pearsonr(data['height'], data['weight'])
     etaSq = aov.SS[0] / (aov.SS[0] + aov.SS[1])
     ```
     ![etaSquare](images/etaSquare.png)
+
+## Day 39 : 從資料中生成特徵
+### 兩大類特徵工程
+#### 1. 衍生
+* 以現有收集的資料為主，透過探索性分析，了解資料與目標之間的關係後，產生出特徵
+#### 2. 添加
+* 現有收集資料以外的資訊，外部數據很多情況下沒有被充分利用，實際上它們可以為模型的性能帶來最重大的突破
+
+### 中低相關的資料，如何進一步萃取可用特徵？
+>透過衍生資料的方法，把原始資料做一些轉換，萃取出和目標變數相關的特徵，大致上可以分成以下幾種類型， 稱作 ICR
+#### 指示器變量 (Indicator)
+* e.g. 體重和失眠有高度相關性，透過 `apply()` 做指示器變量轉換
+    ```python
+    data['weight_new'] = data['weight'].apply((lambda x: 1 if x >= 100 else 0))
+    ```
+#### 資料組合 (Combination)
+* e.g. 失眠和 BMI 指數相關時，則我們可以根據資料中的體重和身高，產生出 BMI，則 BMI 就是預測失眠的特徵之一
+    ```python
+    data['BMI'] = round(data['weight']/data['height']/data['height'] * 100 * 100, 2)
+    ```
+#### 資料重新定義 (Reshape)
+* 數值到分類的映射
+    * 可以將年齡對應成兒童、青少年與成年的資料
+    * 使用 `apply()`
+
+* 合併稀疏分類
+    * 發現年齡中，某一個年齡層人數偏少，可以做合併的動作
+    * 用交叉列連表，統計各類型的資料筆數，發現有小於5的資料點，建議合併
+    * 使用 `pd.crosstab()` 後搭配 `apply()`
+
+* 定義類別資料距離
+    * 兒童/青少年/成年人，假設這三個群組對於失眠的貢獻不同，年紀越大失眠越嚴重，我們可以轉成 1/2/3 或 1/4/9
+    * 使用 `apply()`
+
+* 創造虛擬變量 - One hot encoding
+    * 假設將年紀資料從連續轉成離散，分成兒童/青少年/成年人三種類型，透過 one hot encoding 產生三個新欄位 (child: 1|0, teen: 1|0, adult: 1|0,)
+    * 使用 `pd.get_dummies()` 並與 data 做 `pd.concat([data, dummy], axis=1)`
+
+### 最後再進行特徵與目標變數的相關性檢驗（回到 Day 38 的部分）
+
+## Day 40 : 從資料中選取好的特徵
