@@ -649,3 +649,76 @@ corr, _ = stats.pearsonr(data['height'], data['weight'])
 ### 最後再進行特徵與目標變數的相關性檢驗（回到 Day 38 的部分）
 
 ## Day 40 : 從資料中選取好的特徵
+* 特徵選取的三大方法
+    * 過濾法 (Filter) 
+    * 包裝法 (Wrapper)
+    * 嵌入法 (Embedded)
+
+### 過濾法 (Filter) 
+* 列入一些篩選特徵的標準，把具變化性以及與目標變數相關的特徵，挑選出具變化性以及中高度相關的特徵，方法包含：
+    1. 移除低變異數的特徵
+    2. 單變量特徵選取（Univariate Feature Selection）
+        * 目標變數為離散型，採用卡方檢定(chi2)
+        * 目標變數為連續型，可採用 f_regression
+1. **移除低變異數的特徵**
+    * Step0：先標準化 (利用最大最小值)(否則資料範圍不同會有差異很大的變異數)
+    * Step1：運用 [VarianceThreshold](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.VarianceThreshold.html) 設定門檻
+        ```python
+        filter1 = VarianceThreshold(threshold=(100))
+        ```
+    * Step2：透過函數做計算，過濾
+        ```python
+        data_filter1 = filter1.fit_transform(特徵)
+        print(filter1.variances_) # 計算每個特徵的變異數
+        ```
+    * Step3：確定哪一些特徵符合條件留下來
+        ```python
+        print(filter1.get_support(True))
+        ```
+2. **單變量特徵選取**
+* Step1：根據目標變量是連續或離散，來決定判斷的準則
+
+    ![univariate](images/univariate.png)
+
+* Step2：依照哪一個方法挑選單變量特徵
+    * [SelectKBest](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectKBest.html) : 選取 K 個最好的特徵 (k 為參數，代表你想選擇多少特徵)
+
+    * [SelectPercentile](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectPercentile.html) : 選取多少百分比的特徵 (percentile 為參數，代表百分比，用 10 代表 10%)
+
+### 包裝法 (Wrapper)
+* 將特徵選擇看作是搜索問題，根據某一種評量標準，每次選擇某些特徵或排除某些特徵，常用的方法為遞歸特徵消除 (RFE)
+* **遞歸特徵消除 (RFE)**
+    * 根據你的問題是離散或連續，選擇帶有 `coef_` 和 `feature_importances_` 的模型
+    * 例如：
+        * `SVC(kernel="linear")`
+        * `LogisticRegression`
+* Step 1: 離散型要先轉成數值型態
+
+* Step 2: 根據目標變量是連續或離散，來決定判斷的準則
+    * 離散型，使用 `SVC(kernel="linear")`
+
+* Step 3: 設定 RFE 裡面的參數
+    * `n_features_to_select` : 最後要選擇留下多少特徵
+    * `step` : 刪除法，每一步刪除多少特徵
+
+* Step 4: `.fit(x.y)`
+    * 每一步都依不同的特徵組合建立模型，判斷最終要選擇那些特徵
+
+* Step 5: `support_`
+    * 呈現包裝法搭配 SVC 下，選擇最好的特徵，用 True 來表示
+
+* Step 6: `ranking_`
+    * 呈現每個特徵對於模型的重要性，重要度依序為 1, 2...依此類推
+
+```python
+# x = 特徵
+# y = 目標變量
+estimator = SVC(kernel="linear")
+selector = RFE(estimator, n_features_to_select=2, step=1)
+selector = selector.fit(x, y)
+```
+
+### 嵌入法 (Embedded)
+* 先使用機器學習或模型進行訓練，得到某些特徵的權重係數
+* 根據係數的重要性來選擇特徵，類似過濾法，但是採用訓練的結果來選擇特徵
+
