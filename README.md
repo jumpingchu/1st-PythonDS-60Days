@@ -236,6 +236,20 @@ a.tolist()
     ```
 
 ## Day 11_2 : Dataframe 的新增與刪除
+### 插入或刪除資料
+* ` = ` 增加行（欄）
+* `append()` 新增列（資料）
+* `drop()` 刪除列（資料）
+* `del` 或 `pop()` 刪除行（欄）
+
+### 合併與重組
+> 注意 index 問題
+* 連集（Concat）上下相拼
+* 合併（Merge）欄位左右相拼
+    * `pandas.merge(left, right, how='inner', on=None)`
+    * on：用來合併的相依欄位
+* 連接（Join）索引左右相拼
+* 分組（GroupBy) 依照資料內容重新組裝
 
 ## Day 11_3 : 外部資料存取
 
