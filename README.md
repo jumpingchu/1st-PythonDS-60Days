@@ -247,8 +247,10 @@ a.tolist()
 * 連集（Concat）上下相拼
 * 合併（Merge）欄位左右相拼
     * `pandas.merge(left, right, how='inner', on=None)`
+    * 預設採用 how='inner' 方法合併，只會留下兩邊共同擁有的資料
     * on：用來合併的相依欄位
 * 連接（Join）索引左右相拼
+    * `df1.join(df2, lsuffix, rsuffix)` 不會將欄位 overlap，需要額外定義 suffix
 * 分組（GroupBy) 依照資料內容重新組裝
 
 ## Day 11_3 : 外部資料存取
