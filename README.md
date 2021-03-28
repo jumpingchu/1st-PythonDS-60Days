@@ -101,7 +101,7 @@
 ---
 <img width=150 src="images/np.png"></img>
 
-## Day 1 : NumPy 基本操作
+## Day 1 : 基本操作
 ```python
 # 建立陣列
 .array()
@@ -128,7 +128,7 @@ a.tolist()
 # [[0, 1, 2, 3, 4], [5, 6, 7, 8, 9], [10, 11, 12, 13, 14]]
 # 會將所有維度的元素轉換成 list
 ```
-## Day 2 : NumPy 陣列進階操作
+## Day 2 : 陣列進階操作
 ### 陣列重塑
 * 展開成 1 維：
     * `ravel()` 變更時原陣列也會變更
@@ -162,27 +162,27 @@ a.tolist()
 * `sort()` 回傳排序後的陣列，若是陣列物件則會 in-place
 * `argsort()` 回傳排序後的陣列索引值
 
-## Day 3 : NumPy 陣列運算及數學
+## Day 3 : 陣列運算及數學
 * 基本運算方式同 Python 運算
 
-## Day 4 : NumPy 陣列邏輯函式
+## Day 4 : 陣列邏輯函式
 * 函數應注意是否為 element-wise 的比較邏輯 (＝該傳入陣列還是元素)
 
-## Day 5 : NumPy 統計函式
+## Day 5 : 統計函式
 * 注意是否要忽略 nan，不忽略的話基本上都會優先回傳 nan
 * 平均值計算可以加權，如：`np.average(a, axis=1, weights=[0.25, 0.75])`
 
-## Day 6 : 使用 NumPy 存取各種檔案內容
+## Day 6 : 存取各種檔案內容
 * .npy 與 .npz 格式是 NumPy 的檔案格式，透過 `save()`、`savez()`、`load()` 函式進行儲存與讀取。
 * 針對文字檔，可以使用 `savetxt()`、`loadtxt()` 來儲存與讀取。功能更強大的 `genfromtxt()` 則是提供更多選項在讀取檔案時進行操作
 
-## Day 7 : NumPy 的矩陣函式與線性代數應用
+## Day 7 : 矩陣函式與線性代數應用
 * 矩陣乘積 : 點積、內積、外積、矩陣乘法
 * 矩陣操作 :　跡、行列式、反矩陣、轉置、特徵值與特徵向量、秩、線性系統求解
 * 特殊矩陣 : 單位矩陣 (identity)、單位矩陣 (eye)、三角矩陣、單對角陣列、上三角矩陣、下三角矩陣
 * 矩陣分解 : Cholesky、QR、SVD
 
-## Day 8 : NumPy 結構化陣列
+## Day 8 : 結構化陣列
 * 資料型別常在陣列中用到，NumPy 的 dtype 彈性很大，並且可以與 Python 資料型別交互使用
 * NumPy 陣列也可以儲存複合式資料，也就是包含不同資料型別的元素。這就是結構化陣列 (Structured Arrays) 的功能，進行後續的資料存取及處理。
 ![dtype_ref](images/dtype%20對照表.png)
@@ -190,20 +190,20 @@ a.tolist()
 ---
 <img width=150 src="images/pd.png"></img>
 
-## Day 9 : 使用 Pandas 讀寫各種常用的檔案格式
+## Day 9 : 讀寫各種常用的檔案格式
 * 讀寫 csv: `read_csv()`, `to_csv()`
 * 讀寫 excel: `read_excel()`, `to_excel()`
 * 讀寫 json: `read_json()`, `to_json()`
 * 讀寫 SQL 資料庫: `io.sql.read_sql()`, `to_sql()`
 
-## Day 10 : Pandas 資料索引操作 (資料過濾、選擇與合併)
+## Day 10 : 資料索引操作 (資料過濾、選擇與合併)
 * 指定欄位名稱當做索引: `.set_index()` 
 * 對欄位名稱進行重新命名: `.rename(column={'old_name': 'new_name'})`
 * 增加欄位: `['new_col_name']`, `.insert()`
 * 刪除欄位: `del`, `.pop()`, `.drop()`
 * 增加列資料: `.append()`
 
-## Day 11 : Pandas 類別資料、缺失值處理
+## Day 11 : 類別資料、缺失值處理
 ### 類別資料
 * 順序性的類別資料，需要有順序性的 encoding 方法，可以使用 sklearn 中的 `LabelEncoder()`
 * 對於一般性的類別資料，則不需要有順序的編碼，可以使用 pandas 中的 `get_dummies()`
@@ -214,7 +214,32 @@ a.tolist()
     3. `method='ffill'`(補前值) 或 `'bfill'`（補後值）
 * 內插法補值 `interpolate()`
 
-## Day 12 : Pandas 常見圖表程式設計
+## Day 11_1 : 迭代與重複操作
+* `map()`：對 series 所有元素作一樣的操作 
+* `apply()`：對 series 或 "dataframe 逐行或逐列" 做一樣的操作
+* `applymap()`：對 dataframe 所有元素作一樣的操作
+* `iteritems()`, `iterrows()`, `itertuples()`
+    ```python
+    for d in df.iteritems():
+        print(d)
+    # ('name', 0  Alice  1  Bob Name: name, dtype: object)
+    # ('age', 0  20  1  32  Name: age, dtype: int64)
+
+    for d in df.iterrows():
+        print(d)
+    # (0, name Alice age 20 Name: 0, dtype: object)
+    # (1, name Bob age 32 Name: 1, dtype: object)
+    for d in df.itertuples():
+        print(d)
+    # Pandas(Index=0, name='Alice', age=20)
+    # Pandas(Index=1, name='Bob', age=32)
+    ```
+
+## Day 11_2 : Dataframe 的新增與刪除
+
+## Day 11_3 : 外部資料存取
+
+## Day 12 : 常見圖表程式設計
 ### 折線圖
 * 適用：會隨時間變動的值
     ```python
@@ -238,7 +263,7 @@ a.tolist()
     .plot.scatter(x, y)
     ```
 
-## Day 13 : Pandas 統計函式使用教學
+## Day 13 : 統計函式使用教學
 ### 相關係數
 1. 介於 –1 與 +1 之間，即 –1 ≤ r ≤ +1
     * r > 0 時，表示兩變數正相關
@@ -270,7 +295,7 @@ a.tolist()
     df.groupby(['sex', 'class']).agg(['mean', 'max'])
     ```
 
-## Day 16 : Pandas 時間序列
+## Day 16 : 時間序列
 * 控制時間長度的函數 `.to_period()`，參數 `freq` 代表時間頻率(Y：年 / M：月 / W：週 / D：日 / H：小時)
 * 利用 `resample()` 更改時間頻率，如年轉成季 `resample('Q')`
 * 移動（shifting）指的是沿著時間軸將資料前移或後移
@@ -297,7 +322,7 @@ a.tolist()
     ```python
     pd.offsets.BDay()
     ```
-## Day 17 : Pandas 效能調校
+## Day 17 : 效能調校
 * 三個加速方法
     * 讀取資料型態選最快速的 (可先存為 pkl 檔 `to_pickle()`，減少之後每次開啟所花費的時間)
     * 多使用內建函數 (如 `agg()`, `transform()`...)
